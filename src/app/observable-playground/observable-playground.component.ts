@@ -7,21 +7,26 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./observable-playground.component.css'],
 })
 export class ObservablePlaygroundComponent implements OnInit, OnDestroy {
+  observable$;
   constructor() {
-    const observable$ = new Observable((subscriber) => {
+  }
+  
+  ngOnInit(): void {
+    this.observable$ = new Observable((subscriber) => {
       subscriber.next(1);
       subscriber.next(2);
       subscriber.next(3);
       subscriber.complete();
     });
-    observable$.subscribe(
+    this.observable$.subscribe(
       (value) => console.log(value),
       (error) => console.log(error),
       () => console.log('completed')
-    );
+    );    
   }
-
-  ngOnInit(): void { }
   
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {
+    console.log('destroyed');
+    this.observable$.unsubscribe();
+  }
 }
