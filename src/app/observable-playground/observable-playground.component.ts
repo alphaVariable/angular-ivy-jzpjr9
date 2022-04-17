@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -6,7 +6,7 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './observable-playground.component.html',
   styleUrls: ['./observable-playground.component.css'],
 })
-export class ObservablePlaygroundComponent implements OnInit {
+export class ObservablePlaygroundComponent implements OnInit, OnDestroy {
   constructor() {
     const observable$ = new Observable((subscriber) => {
       subscriber.next(1);
@@ -21,5 +21,7 @@ export class ObservablePlaygroundComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+  
+  ngOnDestroy(): void { }
 }
