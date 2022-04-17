@@ -8,18 +8,15 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ObservablePlaygroundComponent implements OnInit {
   constructor() {
-    const observable$ = new Observable(subscriber => {
+    const observable$ = new Observable((subscriber) => {
       subscriber.next(1);
       subscriber.next(2);
       subscriber.next(3);
-      setTimeout(() => {
-        subscriber.next(4);
-        subscriber.complete();
-      }, 1000);
+      subscriber.complete();
     });
     observable$.subscribe(
-      value => console.log(value),
-      error => console.log(error),
+      (value) => console.log(value),
+      (error) => console.log(error),
       () => console.log('completed')
     );
   }
