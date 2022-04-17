@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './observable-playground.component.html',
   styleUrls: ['./observable-playground.component.css']
 })
-export class ObservablePlaygroundComponent implements OnInit {
+export class ObservablePlaygroundComponent implements OnInit, OnDestroy {
 // create an observable
 // subscribe to it
 // unsubscribe
@@ -25,7 +25,11 @@ export class ObservablePlaygroundComponent implements OnInit {
       value => console.log(value),
       error => console.log(error),
       () => console.log('completed')
-    );
+    );    
+  }
+  ngOnDestroy() {
+    console.log('destroyed');
+    this.observable.unsubscribe();
   }
 
 }
